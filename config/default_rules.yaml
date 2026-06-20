@@ -1,0 +1,206 @@
+# PC Migration Helper - Default Scan Classification Rules
+# PC迁移助手 - 默认扫描分类规则
+
+scan:
+  # Directories to always exclude (case-insensitive on Windows)
+  # 始终排除的目录（Windows上不区分大小写）
+  exclude_paths:
+    - "C:\\Windows"
+    - "C:\\Program Files"
+    - "C:\\Program Files (x86)"
+    - "C:\\ProgramData"
+    - "C:\\$Recycle.Bin"
+    - "C:\\System Volume Information"
+    - "C:\\Recovery"
+    - "C:\\PerfLogs"
+    - "C:\\Intel"
+    - "C:\\AMD"
+
+  # Path patterns to exclude (glob-style, relative to user profile)
+  # 排除的路径模式（相对于用户配置文件目录）
+  exclude_patterns:
+    - "AppData/Local/Temp/**"
+    - "AppData/Local/Microsoft/Windows/**"
+    - "AppData/Local/Packages/**"
+    - "AppData/Local/Google/Chrome/User Data/**"
+    - "AppData/Local/Microsoft/Edge/User Data/**"
+    - "AppData/Local/Firefox/Profiles/**/cache2/**"
+    - "AppData/Roaming/Microsoft/Windows/Start Menu/**"
+    - "NTUSER.DAT*"
+    - "ntuser.ini"
+    - "ntuser.dat*"
+
+  # File extensions to always exclude
+  # 始终排除的文件扩展名
+  exclude_extensions:
+    - .sys
+    - .dll
+    - .exe
+    - .msi
+    - .ini
+    - .log
+    - .tmp
+    - .bak
+    - .cfg
+    - .dat
+    - .cab
+    - .cat
+    - ".inf"
+    - .mum
+    - .pdb
+    - .manifest
+    - .gpd
+    - .ppd
+
+  # Skip files/dirs with these Windows attributes
+  # 跳过具有这些Windows属性的文件/目录
+  skip_attributes:
+    - system
+    - hidden
+
+  # Maximum file size to include (4 GB)
+  # 包含的最大文件大小
+  max_file_size: 4294967296
+
+  # Minimum file size to include (0 = include empty files)
+  # 包含的最小文件大小
+  min_file_size: 0
+
+# File classification by extension
+# 按扩展名分类文件
+classification:
+  documents:
+    - .doc
+    - .docx
+    - .pdf
+    - .txt
+    - .rtf
+    - .odt
+    - .ods
+    - .odp
+    - .xls
+    - .xlsx
+    - .xlsm
+    - .xlsb
+    - .csv
+    - .ppt
+    - .pptx
+    - .pptm
+    - .md
+    - .tex
+    - .pages
+    - .key
+    - .numbers
+    - .wps
+    - .et
+    - .dps
+    - .mpp
+    - .vsdx
+    - .mmap
+    - .xmind
+    - .mindnode
+    - .nb
+    - .nb3
+
+  photos:
+    - .jpg
+    - .jpeg
+    - .png
+    - .gif
+    - .bmp
+    - .tiff
+    - .tif
+    - .raw
+    - .cr2
+    - .nef
+    - .svg
+    - .webp
+    - .heic
+    - .heif
+    - .psd
+    - .ico
+    - .dng
+    - .arw
+    - .orf
+    - .rw2
+    - .pef
+    - .sr2
+
+  videos:
+    - .mp4
+    - .avi
+    - .mkv
+    - .mov
+    - .wmv
+    - .flv
+    - .webm
+    - .m4v
+    - .mpg
+    - .mpeg
+    - .3gp
+    - .ts
+    - .vob
+    - .rm
+    - .rmvb
+    - .asf
+    - .f4v
+
+  music:
+    - .mp3
+    - .flac
+    - .wav
+    - .aac
+    - .ogg
+    - .wma
+    - .m4a
+    - .alac
+    - .ape
+    - .opus
+    - .aiff
+    - .mid
+    - .midi
+
+  archives:
+    - .zip
+    - .rar
+    - .7z
+    - .tar
+    - .gz
+    - .bz2
+    - .xz
+    - .iso
+    - .dmg
+    - .tgz
+
+# Path-based category hints (override extension-based classification)
+# 基于路径的分类提示（优先于扩展名分类）
+path_hints:
+  documents:
+    - "Documents"
+    - "Desktop"
+    - "Downloads"
+  photos:
+    - "Pictures"
+    - "Photos"
+  videos:
+    - "Videos"
+    - "Movies"
+  music:
+    - "Music"
+    - "Audio"
+
+# Migration defaults
+# 迁移默认设置
+migration:
+  default_format: "7z"
+  compression_level: 5
+  verify_after_write: true
+  chunk_size: 65536
+
+# UI settings
+# 界面设置
+ui:
+  language: "zh_CN"
+  theme: "light"
+  window_width: 1000
+  window_height: 700
