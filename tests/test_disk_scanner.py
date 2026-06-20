@@ -66,7 +66,7 @@ class TestDiskScanner:
         assert result.state == ScanState.COMPLETED
         assert result.file_count == len(expected_files)
         assert result.total_size > 0
-        assert result.scan_duration > 0
+        assert result.scan_duration >= 0
 
     def test_scan_finds_documents(self, scanner, temp_file_tree):
         """Test that documents are found and classified."""

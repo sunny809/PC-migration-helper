@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>迁移报告 / Migration Report — sunnydeMacBook-Pro.local</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f5f5; color: #333; padding: 24px; }
+.container { max-width: min(90%, 1200px); margin: 0 auto; }
+.header { background: linear-gradient(135deg, #2196F3, #1976D2); color: white; border-radius: 12px; padding: 32px; margin-bottom: 24px; }
+.header h1 { font-size: 24px; margin-bottom: 8px; }
+.header .meta { font-size: 14px; opacity: 0.9; }
+.header .meta span { display: inline-block; margin-right: 24px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.card { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.card .value { font-size: 28px; font-weight: bold; color: #2196F3; }
+.card .label { font-size: 13px; color: #888; margin-top: 4px; }
+.card.verify-pass .value { color: #4CAF50; }
+.card.verify-fail .value { color: #f44336; }
+.section { background: white; border-radius: 10px; padding: 24px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.section h2 { font-size: 18px; margin-bottom: 16px; color: #333; border-bottom: 2px solid #f0f0f0; padding-bottom: 12px; }
+.bar { display: flex; align-items: center; margin-bottom: 8px; }
+.bar .label { width: 140px; font-size: 13px; color: #555; flex-shrink: 0; }
+.bar .track { flex: 1; height: 20px; background: #f0f0f0; border-radius: 4px; overflow: hidden; }
+.bar .fill { height: 100%; border-radius: 4px; }
+.bar .stat { width: 180px; text-align: right; font-size: 12px; color: #666; flex-shrink: 0; }
+.tree { font-size: 13px; }
+.tree details { margin-left: 16px; }
+.tree summary { cursor: pointer; padding: 4px 0; color: #333; }
+.tree summary:hover { color: #2196F3; }
+.tree .file { display: flex; align-items: center; padding: 3px 0 3px 16px; }
+.tree .file:hover { background: #f8f9fa; border-radius: 4px; }
+.tree .file .name { flex: 1; }
+.tree .file .size { color: #888; width: 80px; text-align: right; font-size: 12px; }
+.tree .file .hash { color: #bbb; font-family: monospace; font-size: 11px; margin-left: 12px; }
+.tree .file .status { width: 20px; text-align: center; font-size: 14px; }
+.status-ok { color: #4CAF50; }
+.status-failed { color: #f44336; }
+.errors { background: #fff3f3; border: 1px solid #ffcdd2; border-radius: 8px; padding: 16px; margin-top: 16px; }
+.errors h3 { color: #f44336; font-size: 14px; margin-bottom: 8px; }
+.errors ul { margin: 0; padding-left: 20px; font-size: 12px; color: #666; }
+.footer { text-align: center; font-size: 12px; color: #aaa; margin-top: 32px; padding: 16px; }
+@media print { body { padding: 0; background: white; } .header { border-radius: 0; } .card { box-shadow: none; border: 1px solid #ddd; } .section { box-shadow: none; border: 1px solid #ddd; page-break-inside: avoid; } }
+</style>
+</head>
+<body>
+<div class="container">
+<div class="header">
+<h1>迁移报告 / Migration Report</h1>
+<div class="meta">
+<span>🖥 sunnydeMacBook-Pro.local</span>
+<span>🕐 2026-06-20T12:21:47.284866</span>
+<span>📦 COPY_ONLY</span>
+<span>🔐 xxhash</span>
+</div>
+</div>
+
+<div class="cards">
+<div class="card"><div class="value">2</div><div class="label">文件总数 / Total Files</div></div>
+<div class="card"><div class="value">300 B</div><div class="label">总大小 / Total Size</div></div>
+<div class="card"><div class="value">1</div><div class="label">文件分类 / Categories</div></div>
+<div class="card verify-pass"><div class="value">✓ 2 passed</div><div class="label">校验结果 / Verification</div></div>
+</div>
+
+<div class="section">
+<h2>📊 分类统计 / Category Statistics</h2>
+<div class="bar">
+<div class="label">其他 / Other</div>
+<div class="track"><div class="fill" style="width:100.0%;background:#9E9E9E;"></div></div>
+<div class="stat">2 文件 / 300 B (100.0%)</div>
+</div>
+</div>
+
+<div class="section">
+<h2>📁 文件清单 / File List</h2>
+<p style="font-size:12px;color:#888;margin-bottom:12px;">点击展开目录 / Click to expand folders</p>
+<details>
+<summary>📁 test/</summary>
+<div class="file">
+<span class="status status-ok">✓</span>
+<span class="name">📄 a.docx</span>
+<span class="size">100 B</span>
+<span class="hash"></span>
+</div>
+<div class="file">
+<span class="status status-ok">✓</span>
+<span class="name">📄 b.jpg</span>
+<span class="size">200 B</span>
+<span class="hash"></span>
+</div>
+</details>
+</div>
+
+
+
+<div class="footer">
+PC迁移助手 v0.1.0 — 由开源工具 PC Migration Helper 生成
+</div>
+</div>
+</body>
+</html>

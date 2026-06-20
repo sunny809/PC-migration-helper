@@ -11,6 +11,7 @@ from src.ui.widgets.file_tree_filter import FileTreeFilterProxy
 from src.ui.widgets.file_tree_model import FileTreeModel
 from src.ui.widgets.file_tree_view import FileTreeView
 from src.ui.widgets.size_stats_widget import SizeStatsWidget
+from src.ui.widgets.treemap_widget import TreemapWidget
 from src.utils.human_size import format_size
 
 try:
@@ -22,6 +23,7 @@ try:
         QLineEdit,
         QPushButton,
         QSplitter,
+        QStackedWidget,
         QVBoxLayout,
         QWidget,
     )
@@ -129,10 +131,36 @@ class ReviewPage(QWidget if HAS_PYSIDE6 else object):
         splitter.addWidget(tree_container)
 
         # Size stats panel
+        stats_container = QWidget()
+        stats_layout = QVBoxLayout(stats_container)
+        stats_layout.setContentsMargins(0, 0, 0, 0)
+
+        # View toggle: bar chart / treemap
+        toggle_layout = QHBoxLayout()
+        view_label = QLabel("显示方式 / View:")
+        view_label.setStyleSheet("font-size: 12px; color: #555;")
+        toggle_layout.addWidget(view_label)
+        self._view_toggle = QPushButton("📊 方块图 / Treemap")
+        self._view_toggle.setObjectName("secondaryButton")
+        self._view_toggle.setFixedHeight(28)
+        self._view_toggle.setCheckable(True)
+        self._view_toggle.clicked.connect(self._on_toggle_view)
+        toggle_layout.addWidget(self._view_toggle)
+        toggle_layout.addStretch()
+        stats_layout.addLayout(toggle_layout)
+
+        # Stacked widget: 0 = bar chart, 1 = treemap
+        self._stats_stack = QStackedWidget()
         self._stats_widget = SizeStatsWidget()
-        self._stats_widget.setMinimumWidth(280)
-        self._stats_widget.setMaximumWidth(400)
-        splitter.addWidget(self._stats_widget)
+        self._treemap_widget = TreemapWidget()
+        self._treemap_widget.block_clicked.connect(self._on_treemap_click)
+        self._stats_stack.addWidget(self._stats_widget)   # index 0
+        self._stats_stack.addWidget(self._treemap_widget)  # index 1
+        stats_layout.addWidget(self._stats_stack, 1)
+
+        stats_container.setMinimumWidth(280)
+        stats_container.setMaximumWidth(420)
+        splitter.addWidget(stats_container)
 
         splitter.setStretchFactor(0, 3)
         splitter.setStretchFactor(1, 1)
@@ -192,7 +220,33 @@ class ReviewPage(QWidget if HAS_PYSIDE6 else object):
         if self._tree_model:
             stats = self._tree_model.get_category_stats()
             self._stats_widget.update_stats(stats)
+            self._treemap_widget.set_data(stats)
             self._update_summary()
+
+    def _on_toggle_view(self) -> None:
+        """Switch between bar chart and treemap view."""
+        current = self._stats_stack.currentIndex()
+        new_index = 1 if current == 0 else 0
+        self._stats_stack.setCurrentIndex(new_index)
+        self._view_toggle.setText(
+            "📊 方块图 / Treemap" if new_index == 0
+            else "📈 条形图 / Bar Chart"
+        )
+        if new_index == 1:
+            self._treemap_widget._recalc_layout()
+            self._treemap_widget.update()
+
+    def _on_treemap_click(self, category) -> None:
+        """Handle treemap block click — filter tree to that category."""
+        if self._filter_proxy:
+            self._filter_proxy.set_filter_category(category)
+            # Update combo box to match
+            for i in range(self._category_combo.count()):
+                if self._category_combo.itemData(i) == category:
+                    self._category_combo.blockSignals(True)
+                    self._category_combo.setCurrentIndex(i)
+                    self._category_combo.blockSignals(False)
+                    break
 
     def _update_summary(self) -> None:
         """Update the bottom summary bar."""
