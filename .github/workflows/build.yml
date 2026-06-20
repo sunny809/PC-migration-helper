@@ -71,7 +71,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: PC迁移助手-Windows-x64
-          path: dist/PC迁移助手/
+          name: PC-migration-helper-Windows-x64
+          path: dist/PC-Migration-Helper/
           if-no-files-found: error
           compression-level: 6

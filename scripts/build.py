@@ -11,15 +11,28 @@ import sys
 import subprocess
 
 
+def _safe_print(msg: str) -> None:
+    """Print with fallback encoding for Windows consoles that can't handle Unicode."""
+    try:
+        print(msg)
+    except UnicodeEncodeError:
+        # Replace unencodable characters with '?'
+        safe = msg.encode(sys.stdout.encoding, errors='replace').decode(sys.stdout.encoding)
+        print(safe)
+
+
 def build():
     """Build the application using PyInstaller."""
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     os.chdir(project_root)
 
+    # Use ASCII-safe project name for PyInstaller to avoid encoding issues
+    app_name = "PC-Migration-Helper"
+
     # PyInstaller command
     cmd = [
         sys.executable, "-m", "PyInstaller",
-        "--name=PC迁移助手",
+        f"--name={app_name}",
         "--onedir",  # Create a directory (faster startup than --onefile)
         "--windowed",  # No console window
         "--noconfirm",  # Overwrite output directory
@@ -50,17 +63,17 @@ def build():
         "main.py",
     ]
 
-    print("Building PC Migration Helper with PyInstaller...")
-    print(f"Project root: {project_root}")
-    print(f"Command: {' '.join(cmd)}")
+    _safe_print("Building PC Migration Helper with PyInstaller...")
+    _safe_print(f"Project root: {project_root}")
 
     result = subprocess.run(cmd, cwd=project_root)
 
+    dist_dir = os.path.join(project_root, 'dist', app_name)
     if result.returncode == 0:
-        print("\n✓ Build successful!")
-        print(f"Output directory: {os.path.join(project_root, 'dist', 'PC迁移助手')}")
+        _safe_print("\nBuild successful!")
+        _safe_print(f"Output directory: {dist_dir}")
     else:
-        print("\n✗ Build failed!")
+        _safe_print("\nBuild failed!")
         sys.exit(result.returncode)
 
 
