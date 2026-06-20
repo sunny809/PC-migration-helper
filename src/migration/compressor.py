@@ -135,7 +135,8 @@ class Compressor:
 
                     try:
                         # Store with relative path to preserve directory structure
-                        arcname = file_entry.path.lstrip(os.sep)
+                        _, arcname = os.path.splitdrive(file_entry.path)
+                        arcname = arcname.lstrip(os.sep)
 
                         # Add file to archive
                         zf.write(file_entry.path, arcname=arcname)

@@ -90,8 +90,9 @@ class Copier:
 
             try:
                 # Compute relative path and target path
-                # Strip leading separator to create relative path
-                rel_path = file_entry.path.lstrip(os.sep)
+                # Strip drive letter and leading separator
+                _, rel_path = os.path.splitdrive(file_entry.path)
+                rel_path = rel_path.lstrip(os.sep)
                 target_path = os.path.join(target_dir, rel_path)
 
                 # Create target directory structure
