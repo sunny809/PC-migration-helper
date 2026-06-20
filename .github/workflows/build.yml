@@ -1,5 +1,8 @@
 name: Build PC Migration Helper
 
+permissions:
+  contents: write
+
 on:
   push:
     branches: [main, master]
@@ -86,6 +89,8 @@ jobs:
 
       - name: Create GitHub Release
         if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         uses: softprops/action-gh-release@v2
         with:
           name: PC Migration Helper ${{ github.ref_name }}
