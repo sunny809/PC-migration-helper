@@ -41,3 +41,6 @@ E:\
 # Test artifacts
 .pytest_cache/
 E:\
+
+# Never commit generated report artifacts
+E:*
