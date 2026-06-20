@@ -54,41 +54,25 @@ def build():
         "--hidden-import=py7zr",
         "--hidden-import=YAML",
 
-        # Exclude unused PySide6 modules (can save 100+ MB)
-        "--exclude-module=PySide6.QtNetwork",
-        "--exclude-module=PySide6.QtNetworkAuth",
-        "--exclude-module=PySide6.QtMultimedia",
-        "--exclude-module=PySide6.QtMultimediaWidgets",
-        "--exclude-module=PySide6.QtQml",
-        "--exclude-module=PySide6.QtQuick",
-        "--exclude-module=PySide6.QtQuick3D",
-        "--exclude-module=PySide6.QtQuickControls2",
+        # Exclude massive unused PySide6 modules (saves ~120MB)
         "--exclude-module=PySide6.QtWebEngine",
         "--exclude-module=PySide6.QtWebEngineCore",
         "--exclude-module=PySide6.QtWebEngineWidgets",
         "--exclude-module=PySide6.QtWebChannel",
+        "--exclude-module=PySide6.QtQml",
+        "--exclude-module=PySide6.QtQuick",
+        "--exclude-module=PySide6.QtQuick3D",
+        "--exclude-module=PySide6.QtQuickControls2",
         "--exclude-module=PySide6.QtBluetooth",
         "--exclude-module=PySide6.QtSensors",
         "--exclude-module=PySide6.QtPositioning",
-        "--exclude-module=PySide6.QtXml",
-        "--exclude-module=PySide6.QtSql",
-        "--exclude-module=PySide6.QtTest",
-        "--exclude-module=PySide6.QtSvg",
-        "--exclude-module=PySide6.QtSvgWidgets",
-        "--exclude-module=PySide6.QtOpenGL",
-        "--exclude-module=PySide6.QtOpenGLWidgets",
-        "--exclude-module=PySide6.QtHelp",
-        "--exclude-module=PySide6.QtUiTools",
-        "--exclude-module=PySide6.QtDesigner",
         "--exclude-module=PySide6.QtDataVisualization",
 
-        # Exclude other unused packages
+        # Exclude other unused packages (these are often large)
         "--exclude-module=pandas",
         "--exclude-module=numpy",
         "--exclude-module=matplotlib",
         "--exclude-module=scipy",
-        "--exclude-module=notebook",
-        "--exclude-module=IPython",
         "--exclude-module=PIL",
 
         # Icon
