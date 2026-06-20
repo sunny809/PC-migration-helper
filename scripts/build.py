@@ -29,7 +29,7 @@ def build():
     # Use ASCII-safe project name for PyInstaller to avoid encoding issues
     app_name = "PC-Migration-Helper"
 
-    # PyInstaller command
+    # PyInstaller command — start minimal, optimize later
     cmd = [
         sys.executable, "-m", "PyInstaller",
         f"--name={app_name}",
@@ -37,7 +37,6 @@ def build():
         "--windowed",  # No console window
         "--noconfirm",  # Overwrite output directory
         "--clean",  # Clean cache
-        "--strip",  # Strip debug symbols from binaries
 
         # Add data files
         f"--add-data={os.path.join('config', 'default_rules.yaml')}{os.pathsep}config",
@@ -53,33 +52,6 @@ def build():
         "--hidden-import=PySide6.QtGui",
         "--hidden-import=py7zr",
         "--hidden-import=YAML",
-
-        # Exclude massive unused PySide6 modules (saves ~120MB)
-        "--exclude-module=PySide6.QtWebEngine",
-        "--exclude-module=PySide6.QtWebEngineCore",
-        "--exclude-module=PySide6.QtWebEngineWidgets",
-        "--exclude-module=PySide6.QtWebChannel",
-        "--exclude-module=PySide6.QtQml",
-        "--exclude-module=PySide6.QtQuick",
-        "--exclude-module=PySide6.QtQuick3D",
-        "--exclude-module=PySide6.QtQuickControls2",
-        "--exclude-module=PySide6.QtBluetooth",
-        "--exclude-module=PySide6.QtSensors",
-        "--exclude-module=PySide6.QtPositioning",
-        "--exclude-module=PySide6.QtDataVisualization",
-
-        # Exclude other unused packages (these are often large)
-        "--exclude-module=pandas",
-        "--exclude-module=numpy",
-        "--exclude-module=matplotlib",
-        "--exclude-module=scipy",
-        "--exclude-module=PIL",
-
-        # Icon
-        # f"--icon={os.path.join('assets', 'icons', 'app.ico')}",
-
-        # UAC admin (optional, for scanning some protected directories)
-        # "--uac-admin",
 
         # Entry point
         "main.py",
